@@ -12,7 +12,7 @@ from deepseek_web.client import DeepSeekClient
 class ConfigTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
-        self.file = Path(self.temp.name) / "private" / "config.json"
+        self.file = (Path(self.temp.name) / "private" / "config.json").resolve()
         self.env = patch.dict(os.environ, {"DEEPSEEK_WEB_CONFIG": str(self.file), "DEEPSEEK_API_KEY": ""})
         self.env.start()
 

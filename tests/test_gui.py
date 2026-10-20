@@ -58,7 +58,7 @@ class GUITests(unittest.TestCase):
                 self.app.key.set("gui-test-key")
                 self.app.save_config()
                 self.assertEqual(json.loads(config.read_text(encoding="utf-8"))["api_key"], "gui-test-key")
-                self.assertIn(str(config), self.app.status.get())
+                self.assertIn(str(config.resolve()), self.app.status.get())
 
 
 if __name__ == "__main__":
