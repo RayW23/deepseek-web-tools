@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "deepseek-web-tools"
+version = "0.2.0"
+description = "DeepSeek Search/Fetch CLI, desktop GUI and Harness MCP integration"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+license = {file = "LICENSE"}
+
+[project.optional-dependencies]
+mcp = ["mcp>=1.12,<2"]
+build = ["pyinstaller>=6.10,<7", "build>=1.2,<2"]
+
+[project.scripts]
+dsweb = "deepseek_web.cli:main"
+
+[project.gui-scripts]
+dsweb-gui = "deepseek_web.gui:main"
+
+[tool.setuptools.packages.find]
+include = ["deepseek_web*"]

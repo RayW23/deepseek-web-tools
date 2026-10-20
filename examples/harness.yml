@@ -1,0 +1,14 @@
+# Example only. Generate a ready-to-use file with: dsweb harness-config -o deepseek-web.local.yml
+# Load with: dsh web --patch /absolute/path/to/deepseek-web.local.yml
+- insert:
+    - id: deepseek-web
+      name: '@deepseek-ai/dsh-mcp-client'
+      config:
+        serverName: deepseek_web
+        transport: stdio
+        command: '/absolute/path/to/dsweb'
+        args: ['mcp']
+        env:
+          DEEPSEEK_API_KEY: !!js process.env.DEEPSEEK_API_KEY
+        toolCallTimeoutMs: 180000
+        failOnStartupError: true

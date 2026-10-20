@@ -1,0 +1,40 @@
+name: Test and build
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+        python: ['3.11', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m pip install ".[mcp]"
+      - run: python -m unittest discover -s tests -v
+  windows-package:
+    needs: test
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install ".[mcp,build]"
+      - run: python scripts/build_windows.py
+      - run: python -m build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: deepseek-web-tools-windows
+          path: |
+            dist/*.zip
+            dist/*.sha256
+            dist/*.whl
+            dist/*.tar.gz

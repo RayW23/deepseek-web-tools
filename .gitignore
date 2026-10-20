@@ -1,0 +1,23 @@
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.env
+.env.*
+!.env.example
+
+*.spec
+*.local.yml
+*.local.yaml
+exports/
+
+config.json
+*.local.json
+
+# Local credentials and backups must never be committed.
+.deepseek-web/
+.credentials.yaml
+credentials.json
+*.bak
